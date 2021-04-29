@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,9 +20,9 @@ function App() {
         <nav>
           <ul style={{ listStyleType: "none", padding: 0 }}>
             <li>&emsp;
-              <Link to="/">Home</Link>
+              <button class="btn btn-light"><Link to="/">Home</Link></button>
             &emsp;
-              <Link to="/Game">Game</Link>
+            <button class="btn btn-light"><Link to="/Game">Game</Link></button>
               &emsp;
 
             </li>
@@ -84,15 +86,16 @@ class About extends React.Component {
             <input type="text" placeholder="Player1 Name" onChange={this.readp1} value={this.state.player1} />&emsp;
             <lable>Choose color: </lable>
             <input type="color" onChange={this.readcolorp1} value={this.state.p1Color} />
-          </div><br />
+          </div></div><br />
+          <div class="row">
           <div class="col">
             <lable>Player2: </lable>
             <input type="text" placeholder="Player2 Name" onChange={this.readp2} value={this.state.player2} />&emsp;
             <lable>Choose color: </lable>
             <input type="color" onChange={this.readcolorp2} value={this.state.p2Color}></input>
-            </div>
+            </div></div>
             <Router><br />
-              <button><Link to="/board">Start Game</Link></button>
+            <button class="btn btn-light"><Link to="/board">Start Game</Link></button>
               <Switch>
                 <Route path="/board">
                   <Board />
@@ -100,7 +103,7 @@ class About extends React.Component {
               </Switch>
             </Router>
           
-        </div>
+        
       </div>
     )
   }
@@ -171,7 +174,7 @@ class Board extends React.Component {
           <h1> TURN : <span id="disp">{this.state.P1}</span> </h1>
           <table border="1">
           <tr height="50">
-            <td width="50" id="0" onClick={this.col1} style={{ backgroundColor: 'white' }}></td>
+            <td width="10" id="0" onClick={this.col1} style={{ backgroundColor: 'white' }}></td>
             <td width="50" id="1" onClick={this.col1} style={{ backgroundColor: 'white' }}></td>
             <td width="50" id="2" onClick={this.col1} style={{ backgroundColor: 'white' }}></td>
             <td width="50" id="3" onClick={this.col1} style={{ backgroundColor: 'white' }}></td>
@@ -497,8 +500,20 @@ class Winner extends React.Component{
 
   render(){
     return(
+      <div class="container">
+        <div class="row">
       <h1>Winner is {this.props.name} <br /> Won in time {this.state.min } : {this.state.sec} secs <br /> Total moves {this.state.move}</h1>
+      </div>
+      <div class="row">
+      <button class="btn btn-light" onClick={this.restart}>Restart</button>
+      </div>
+      </div>
     );
 
   }
+
+  restart(){
+    window.location.reload(false);
+  }
+
 }
